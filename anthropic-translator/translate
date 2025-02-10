@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Get the directory where this script is located, following symlinks
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+    DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+    SOURCE="$(readlink "$SOURCE")"
+    [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+# Run the Python script with all arguments passed through
+python3 "$DIR/translate.py" "$@"
+
+# suggest making a symbolic link to your /usr/local/bin/ folder if you are on
+# mac osx. e.g.
+#sudo ln -s ~/translate-tool/translate /usr/local/bin/translate
